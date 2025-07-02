@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Fun Fact Generator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ffcc00;
+      color: black;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    #fact {
+      margin-top: 40px;
+      font-size: 22px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 10px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <h1>🤖 AI Fun Fact Generator</h1>
+  <button onclick="getFunFact()">Get a Fun Fact</button>
+  <p id="fact">Click the button to get an AI-generated fun fact!</p>
+
+  <script>
+    async function getFunFact() {
+      const factEl = document.getElementById("fact");
+      factEl.innerText = "Thinking... 🤖";
+
+      const response = await fetch('/api/funfact');
+      const data = await response.json();
+
+      factEl.innerText = data.fact || "Oops! Something went wrong.";
+    }
+  </script>
+</body>
+</html>
